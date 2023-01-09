@@ -1,8 +1,11 @@
 import { type } from '@testing-library/user-event/dist/type'
 import axios from 'axios'
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useContext, useEffect, useState } from 'react'
 import StoreItem from '../components/StoreItem'
 import Loader from '../components/Loader'
+import { apiContextType, apiData, Context } from '../context/Context'
+import { AiOutlineSearch } from 'react-icons/ai'
+import { Link } from 'react-router-dom'
 
 const Store: FC = () => {
     const [data, setdata] = useState<apiData[]>([])
@@ -11,22 +14,9 @@ const Store: FC = () => {
     // categories
     const [allCategory, setAllCategory] = useState<string[]>([]);
     const [category, setCategory] = useState<string>("");
+
+    const { setDetail, detail } = useContext(Context) as apiContextType
     //interfaces ---->  note put them in exteranl component //ok 
-
-    type apiData = {
-
-        id: number;
-        title: string;
-        description: string
-        price: number
-        discountPercentage: number;
-        rating: number
-        stock: number
-        brand: string
-        category: string
-        thumbnail: string
-        images: string[]
-    }
 
 
     const handleSearch = (event: any): void => {
@@ -77,22 +67,25 @@ const Store: FC = () => {
 
     }, [search, category])
 
-
+    // console.log(detail)
 
     return (
         <div >
-            <div className='flex'>
+            <div className='xl:flex gap-3 w-full items-center justify-center font-normal border-b-4 border-t text-xl grid grid-cols-4 md:grid-cols-8 py-4 xl:px-0 '>
                 {allCategory.map((item, key) => {
-                    return (<div key={key} onClick={() => { setCategory(item) }}>{item}</div>)
+                    return (<div className=' p-1 cursor-pointer rounded hover:text-teal-500' key={key} onClick={() => { setCategory(item) }}>{item}</div>)
                 })}
             </div>
-            <input placeholder='search items here...' value={search} onChange={handleSearch} />
+            <div className='border md:w-[450px] w-full my-2 mb-3 bg-slate-300 flex justify-start p-1 gap-2 items-center rounded-md shadow-xl '>
+                <AiOutlineSearch size={25} />
+                <input className='outline-none py-2 bg-slate-300 text-lg w-full' placeholder='search items here...' value={search} onChange={handleSearch} />
+            </div>
             {loading ? <Loader /> :
-                <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6 xl:gap-12">
+                <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-6 xl:gap-12 items-center justify-center ">
                     {data?.map((item) => {
-                        return (<div key={item.id} >
-                            <StoreItem {...item} />
-                        </div>
+                        return (<Link to='/product' key={item.id} onClick={() => { setDetail(item) }} className="text-decoration-none text-black" >
+                            <StoreItem  {...item} />
+                        </Link>
                         )
                     })}
                 </div>

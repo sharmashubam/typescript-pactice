@@ -1,19 +1,15 @@
 import React, { FC, useContext } from 'react'
 import { AiFillStar, AiOutlineHeart, AiOutlineShoppingCart } from 'react-icons/ai'
-import { apiContextType, Context } from '../context/Context'
 import { useShoppingCart } from '../context/ShoppingCartContext'
-
+import  storeItems from '../data/products.json'
 const About: FC = () => {
 
-  const { setDetail, cart,setCart,detail } = useContext(Context) as apiContextType
+  // itemHandler == number (item id)
+  const {itemHandler,increaseCartQuantity}= useShoppingCart()
 
 
-  const {getItemQuantity,increaseCartQuantity,decreaseCartQuantity,removeFromCart}= useShoppingCart()
+  const detail= storeItems.find((item)=>item.id==itemHandler())
   
- 
-  const cartHandler = (event: any): void => {
-    setCart([]);
-}
   return (
     <div className='p-4'>
       <div className=' flex flex-col md:flex-row gap-12 p-4 m-2 '>
@@ -34,7 +30,7 @@ const About: FC = () => {
 
 
           <div className='flex flex-col justify-start items-left  gap-2 pb-4'>
-            <button onClick={cartHandler} className=' rounded-md shadow-md flex items-center justify-center gap-2 px-3 py-4 w-[60%]  bg-[#F7A8CA] hover:bg-[#F43397] transition-all ease-in-out duration-300 mt-4'>
+            <button onClick={()=>increaseCartQuantity(itemHandler())}  className=' rounded-md shadow-md flex items-center justify-center gap-2 px-3 py-4 w-[60%]  bg-[#F7A8CA] hover:bg-[#F43397] transition-all ease-in-out duration-300 mt-4'>
               <AiOutlineShoppingCart size={30} /> <span className='font-bold text-xl '>Add to Cart</span>
             </button>
             <button className=' rounded-md shadow-md flex items-center justify-center gap-2 px-3 py-4 w-[60%] bg-[#F7A8CA] hover:bg-[#F43397] transition-all ease-in-out duration-300 mt-4'>

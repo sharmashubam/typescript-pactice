@@ -18,7 +18,7 @@ function App() {
   const [detail, setDetail] = useState<apiData | null>(null)
   return (
     <>
-      <Context.Provider value={{ detail, cart, setCart, setDetail }}>
+      <Context.Provider value={{ cart, setCart, setDetail }}>
         <ShoppingCartProvider>
 
           <Navbar />

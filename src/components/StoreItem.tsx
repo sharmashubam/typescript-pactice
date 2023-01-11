@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 import { Button, Card } from 'react-bootstrap';
 
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import { Link } from 'react-router-dom';
 import { useShoppingCart } from '../context/ShoppingCartContext';
 
 type apiData = {
@@ -20,13 +21,14 @@ type apiData = {
 }
 const StoreItem: FC<apiData> = ({ thumbnail, rating, stock, title, discountPercentage, price, id }) => {
 
-  const {getItemQuantity,increaseCartQuantity,decreaseCartQuantity,removeFromCart}= useShoppingCart()
+  const {getItemQuantity,increaseCartQuantity,decreaseCartQuantity,removeFromCart,showItemHandler}= useShoppingCart()
   const quantity = getItemQuantity(id);
 
   return (
     <div className=' overflow-hidden md:h-[560px] md:w-[440px] shadow-xl rounded-md'>
 
-      <img src={thumbnail && thumbnail} className="h-[400px] w-[440px] object-cover" />
+<Link to='/product'>
+      <img onClick={()=>showItemHandler(id)} src={thumbnail && thumbnail} className="h-[400px] w-[440px] object-cover" /></Link>
       <h1 className='text-xl font-sans text-center py-2'>{title}</h1>
 
       <div className='flex '>

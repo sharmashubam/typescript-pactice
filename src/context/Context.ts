@@ -16,7 +16,6 @@ export type apiData = {
   images: string[]
 }
 export type apiContextType = {
-  detail: apiData|null;
   setDetail: (todo: apiData|null) => void;
   cart:apiData[] |null;
   setCart:(todo:apiData[]|null)=>void

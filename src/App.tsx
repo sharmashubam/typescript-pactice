@@ -9,31 +9,33 @@ import Store from './pages/Store';
 // import { Context } from './context/Context';
 import Category from './pages/Category';
 import { apiData, Context } from './context/Context';
+import { ShoppingCartProvider } from './context/ShoppingCartContext';
 
 
 function App() {
+  const [cart, setCart] = useState<apiData[] | null>([])
 
-  const [detail,setDetail]= useState<apiData |null>(null)
+  const [detail, setDetail] = useState<apiData | null>(null)
   return (
     <>
-    <Context.Provider value={{detail,setDetail}}>
+      <Context.Provider value={{ detail, cart, setCart, setDetail }}>
+        <ShoppingCartProvider>
 
+          <Navbar />
 
-    <Navbar />
-      
-      <div className='mb-4 md:w-[90%] mx-auto'>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/product' element={<About />} />
-          <Route path='/store' element={<Store />} />
-          <Route path='/category' element={<Category />} />
+          <div className='mb-4 md:w-[90%] mx-auto'>
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route path='/product' element={<About />} />
+              <Route path='/store' element={<Store />} />
+              <Route path='/category' element={<Category />} />
 
-        </Routes>
-      </div>
+            </Routes>
+          </div>
+        </ShoppingCartProvider>
 
+      </Context.Provider>
 
-    </Context.Provider>
-      
     </>
 
   );

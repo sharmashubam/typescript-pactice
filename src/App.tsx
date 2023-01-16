@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Container } from 'react-bootstrap';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, ScrollRestoration, } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar';
 import About from './pages/Product';
@@ -10,6 +10,8 @@ import Store from './pages/Store';
 import Category from './pages/Category';
 import { apiData, Context } from './context/Context';
 import { ShoppingCartProvider } from './context/ShoppingCartContext';
+import Footer from './components/Footer';
+import CheckOut from './pages/CheckOut';
 
 
 function App() {
@@ -23,15 +25,17 @@ function App() {
 
           <Navbar />
 
-          <div className='mb-4 md:w-[90%] mx-auto'>
+          <div>
             <Routes>
               <Route path='/' element={<Home />} />
               <Route path='/product' element={<About />} />
               <Route path='/store' element={<Store />} />
               <Route path='/category' element={<Category />} />
+              <Route path ='/checkout' element={<CheckOut />} />
 
             </Routes>
           </div>
+          <Footer />
         </ShoppingCartProvider>
 
       </Context.Provider>

@@ -1,8 +1,8 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import { Button, Card } from 'react-bootstrap';
 
 import { AiOutlineShoppingCart } from "react-icons/ai";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useShoppingCart } from '../context/ShoppingCartContext';
 
 type apiData = {
@@ -21,45 +21,34 @@ type apiData = {
 }
 const StoreItem: FC<apiData> = ({ thumbnail, rating, stock, title, discountPercentage, price, id }) => {
 
-  const {getItemQuantity,increaseCartQuantity,decreaseCartQuantity,removeFromCart,showItemHandler}= useShoppingCart()
+  const pathname= useLocation()
+  const { getItemQuantity, increaseCartQuantity, decreaseCartQuantity, removeFromCart, showItemHandler } = useShoppingCart()
   const quantity = getItemQuantity(id);
+  useEffect(() => {
+    window.scrollTo(0,0)
+  }, [pathname])
+  
 
   return (
-    <div className=' overflow-hidden md:h-[560px] md:w-[440px] shadow-xl rounded-md'>
+    <div className=' overflow-hidden md:h-[540px] md:w-[440px] shadow-xl rounded-md mx-auto'>
 
-<Link to='/product'>
-      <img onClick={()=>showItemHandler(id)} src={thumbnail && thumbnail} className="h-[400px] w-[440px] object-cover" /></Link>
+      <div className='h-[400px] w-[490px] relative group'>
+        <Link to='/product' >
+
+          <img onClick={() => showItemHandler(id)} src={thumbnail && thumbnail} className="h-full w-full object-cover " />
+        </Link>
+      </div>
       <h1 className='text-xl font-sans text-center py-2'>{title}</h1>
 
       <div className='flex '>
         <div>
           <div className='flex justify-start gap-12 items-center px-12'>
             <div className='font-semibold line-through'>${price}</div>
-            <div><span className='font-bold'>{discountPercentage}%  </span>OFF</div>
+            <div> <span className='font-bold'>{discountPercentage}%  </span>OFF</div>
           </div>
-          <div className=' px-12'>
+          <div className=' px-12 pb-6'>
             <div className='flex justify-start gap-2 items-center'>Rating :  <span className='font-bold'>{rating} </span> out of <span className='font-bold'> 10 </span></div>
-            <div className='flex justify-start gap-2 items-center'>Available Items : <span className='font-bold'>{stock}</span></div>
           </div>
-
-        </div>
-        <div className='flex flex-col'>
-          {quantity == 0 ?
-            <div className='flex flex-col  justify-start items-center  gap-2 pb-1'>
-              <button onClick={()=> increaseCartQuantity(id) } className=' rounded-md shadow-md flex items-center justify-center gap-2 px-3 py-2  bg-[#F7A8CA] hover:bg-[#F43397] transition-all ease-in-out duration-300 mt-2'>
-                <AiOutlineShoppingCart size={20} /> <span className='font-bold '>Add to Cart</span>
-              </button>
-            </div> : <>
-              <div className='flex gap-1 justify-center items-center' >
-                <div onClick={()=>increaseCartQuantity(id)} className='text-2xl font-bold border px-2  border-slate-500 '>+</div>
-                <div className='text-2xl font-bold border px-2  border-slate-500 rounded-md'>{quantity}</div>
-                <div onClick={()=>decreaseCartQuantity(id)} className='text-2xl font-bold border px-2  border-slate-500'>-</div>
-              </div>
-              <button onClick={()=>{removeFromCart(id)}} className='bg-teal-400 text-white'>Remove</button>
-            </>
-
-          }
-
 
         </div>
 

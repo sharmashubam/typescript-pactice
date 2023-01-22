@@ -20,5 +20,5 @@ This website is built using ReactJS, TypeScript, and Tailwind CSS. It is an e-co
 ## Getting Started
 1. Clone this repository to your local machine
 ```bash
-git clone https://github.com/sharmashubam/typescript-practice.git
+git clone https://github.com/sharmashubam/typescript-pactice.git
 

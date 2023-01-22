@@ -6,10 +6,6 @@ This website is built using ReactJS, TypeScript, and Tailwind CSS. It is an e-co
 - User can add products to the cart and proceed to checkout
 - User can view their order history
 
-## Getting Started
-1. Clone this repository to your local machine
-```bash
-git clone https://github.com/sharmashubam/typescript-practice.git
 
 ## what i have learnt
 - I have learnt the basics of the typescript.
@@ -19,3 +15,10 @@ git clone https://github.com/sharmashubam/typescript-practice.git
 ## Deployed Link:
 - I have deployed the react app on netlify -
 - https://genuine-nasturtium-5ff9c5.netlify.app/
+
+
+## Getting Started
+1. Clone this repository to your local machine
+```bash
+git clone https://github.com/sharmashubam/typescript-practice.git
+

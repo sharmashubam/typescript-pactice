@@ -1,5 +1,5 @@
 # Welcome to my e-commerce website
-This website is built using ReactJS, TypeScript, and Tailwind CSS. It is an e-commerce platform for buying and selling electronic mobile phones and other items.
+This website is built using ReactJS, TypeScript, and Tailwind CSS. It is an e-commerce platform for buying electronic mobile phones and other items.
 
 ## Features
 - User can browse through the various products available on the website
